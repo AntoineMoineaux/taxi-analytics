@@ -4,10 +4,12 @@
 (… résumé …)
 
 ## 2. Data Quality Assessment
+
 Avant toute analyse, un contrôle qualité a été réalisé sur les tables principales du dataset.
 Objectif : valider l'intégrité, la cohérence et la fiabilité des données utilisées pour les KPIs et le dashboard.
 
 ✔️ Structure des tables
+
 Table	Lignes
 trips	320
 customers	120
@@ -16,6 +18,7 @@ cities	6
 ➡️ Les volumes sont cohérents : beaucoup plus de courses que de clients, et un nombre limité de villes, signe d’une activité locale.
 
 ✔️ Valeurs manquantes (NULL)
+
 Aucun NULL détecté sur les colonnes critiques :
 customer_id
 driver_id
@@ -23,39 +26,44 @@ price_total
 ➡️ Le dataset est complet, aucun risque de distorsion sur les KPIs.
 
 ✔️ Distribution des statuts de courses
+
 Status	Volume
 completed	258
 cancelled_by_customer	36
 cancelled_by_driver	17
 no_show	9
-
 ➡️ 80,6 % des courses sont complétées.
 Le taux d’annulation total atteint 19,4 %, ce qui est non négligeable et représente un enjeu opérationnel clair.
 
 ✔️ Valeurs aberrantes
-Aucun prix négatif ou supérieur à 200 €.
 
+Aucun prix négatif ou supérieur à 200 €.
 ➡️ Les données financières sont propres.
 Aucune correction nécessaire.
 
 🎯 Conclusion Data Quality
+
 Les données sont fiables, complètes et directement exploitables pour une analyse SQL & Power BI.
 → Aucun nettoyage agressif requis.
 → Confiance forte dans les KPIs générés.
 
 ## 3. Core Business KPIs
+
 L’analyse SQL met en évidence les indicateurs clés de performance pour comprendre l'activité globale.
 
 💰 Chiffre d’affaires total
+
 6 953,94 €
 Le service génère un CA modéré mais cohérent avec une plateforme locale en phase d’adoption.
 
 🚕 Courses complétées
+
 258 courses sur 320 au total (80,6 %)
 ➡️ Le taux de complétion est bon.
 ➡️ Le taux d’annulation global (~19 %) révèle un levier d’amélioration opérationnel.
 
 💳 Revenu moyen par course
+
 26,95 €
 Indicateur clé pour :
 la prévision du revenu,
@@ -63,11 +71,13 @@ le pilotage marketing,
 la compréhension du panier moyen.
 
 👤 Clients actifs
+
 107 clients uniques
 ➡️ Base client correcte.
 Le niveau de fidélité devra être confirmé via l’analyse du funnel et de la rétention.
 
 🗺️ Répartition du CA par ville
+
 Ville	Revenu (€)
 Bordeaux	1 438,03
 Lille	1 365,31
@@ -80,6 +90,7 @@ Paris	817,69
 Hypothèse business : trajets plus courts, concurrence plus forte, ou comportements clients différents.
 
 🎯 Conclusion KPIs
+
 Le business modèle repose sur :
 un panier moyen stable,
 une base client large,
