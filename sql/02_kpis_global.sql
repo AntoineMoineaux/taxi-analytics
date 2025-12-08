@@ -23,5 +23,11 @@ FROM completed_trips;
 SELECT COUNT(DISTINCT customer_id) AS nb_active_customers
 FROM completed_trips;
 
--- % des courses business (si tu as une colonne 'is_business' ou 'business_flag')
-à completer avec ce kpi
+-- Recette par ville
+SELECT cities.city_name, SUM(price_total) AS revenue
+FROM trips
+JOIN cities ON trips.pickup_city_id = cities.city_id
+WHERE status = 'completed'
+GROUP BY cities.city_name
+ORDER BY revenue DESC;
+
