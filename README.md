@@ -1,107 +1,182 @@
-# 🚖 Taxi Data Insights — SQL + Power BI Project
+🚖 Ride-Hailing Analytics — Funnel, Retention & City Performance Analysis
 
-## 1. Objectif du projet
-(… résumé …)
+SQL • Power BI • Star Schema • DAX
 
-## 2. Data Quality Assessment
+📌 1. Project Overview
 
-Avant toute analyse, un contrôle qualité a été réalisé sur les tables principales du dataset.
-Objectif : valider l'intégrité, la cohérence et la fiabilité des données utilisées pour les KPIs et le dashboard.
+This project analyzes the activity of a fictional ride-hailing app (similar to Uber/Bolt).
+The dataset includes rides, users, drivers and city identifiers.
 
-✔️ Structure des tables
+The main objective is to understand:
 
-Table	Lignes
-trips	320
-customers	120
-drivers	45
-cities	6
-➡️ Les volumes sont cohérents : beaucoup plus de courses que de clients, et un nombre limité de villes, signe d’une activité locale.
+why users rarely return after their first ride,
 
-✔️ Valeurs manquantes (NULL)
+how city performance influences overall revenue,
 
-Aucun NULL détecté sur les colonnes critiques :
-customer_id
-driver_id
-price_total
-➡️ Le dataset est complet, aucun risque de distorsion sur les KPIs.
+what business actions could improve growth, retention and profitability.
 
-✔️ Distribution des statuts de courses
+This project combines two essential analytical dimensions used in real Product & Data teams:
 
-Status	Volume
-completed	258
-cancelled_by_customer	36
-cancelled_by_driver	17
-no_show	9
-➡️ 80,6 % des courses sont complétées.
-Le taux d’annulation total atteint 19,4 %, ce qui est non négligeable et représente un enjeu opérationnel clair.
+👉 User behavior analysis (funnel & retention)
+👉 Geographical performance analysis (city-level revenue & insights)
 
-✔️ Valeurs aberrantes
+🎯 2. Business Problem
 
-Aucun prix négatif ou supérieur à 200 €.
-➡️ Les données financières sont propres.
-Aucune correction nécessaire.
+Why do users fail to return after their first completed ride, and how can city-level performance be optimized to maximize company growth?
 
-🎯 Conclusion Data Quality
+Sub-questions:
 
-Les données sont fiables, complètes et directement exploitables pour une analyse SQL & Power BI.
-→ Aucun nettoyage agressif requis.
-→ Confiance forte dans les KPIs générés.
+Where in the funnel do we lose the most users?
 
-## 3. Core Business KPIs
+Why is short-term retention so low?
 
-L’analyse SQL met en évidence les indicateurs clés de performance pour comprendre l'activité globale.
+Which cities generate the highest revenue?
 
-💰 Chiffre d’affaires total
+How do geographical patterns influence user behavior?
 
-6 953,94 €
-Le service génère un CA modéré mais cohérent avec une plateforme locale en phase d’adoption.
+What strategies should be prioritized to increase growth?
 
-🚕 Courses complétées
+📐 3. Analytical Objectives
+Axis A — Funnel & Retention Analysis
 
-258 courses sur 320 au total (80,6 %)
-➡️ Le taux de complétion est bon.
-➡️ Le taux d’annulation global (~19 %) révèle un levier d’amélioration opérationnel.
+Step1 → Step2 → Step3 definition
 
-💳 Revenu moyen par course
+Conversion ratios
 
-26,95 €
-Indicateur clé pour :
-la prévision du revenu,
-le pilotage marketing,
-la compréhension du panier moyen.
+Day-1 and Day-7 retention
 
-👤 Clients actifs
+Identification of friction points
 
-107 clients uniques
-➡️ Base client correcte.
-Le niveau de fidélité devra être confirmé via l’analyse du funnel et de la rétention.
+Behavior comparison between retained and churned users
 
-🗺️ Répartition du CA par ville
+Axis B — City Performance Analysis
 
-Ville	Revenu (€)
-Bordeaux	1 438,03
-Lille	1 365,31
-Marseille	1 266,12
-Toulouse	1 132,73
-Lyon	934,06
-Paris	817,69
-➡️ 55 % du CA provient de Bordeaux, Lille et Marseille.
-➡️ Paris est la ville la moins contributrice, alors qu’elle représente un marché large.
-Hypothèse business : trajets plus courts, concurrence plus forte, ou comportements clients différents.
+Total revenue by city
 
-🎯 Conclusion KPIs
+City market share
 
-Le business modèle repose sur :
-un panier moyen stable,
-une base client large,
-une performance géographique contrastée.
-Ces KPIs servent de fondation à l’analyse avancée (funnel, rétention, segmentation chauffeurs et clients).
+Average revenue per ride
 
-## 4. SQL Scripts
-(lien vers /sql)
+Anomalies (over- or under-performing cities)
 
-## 5. Power BI Dashboard
-(images + lien PBIX)
+Connecting geography to retention & user behavior
 
-## 6. Insights business
-## 7. Conclusion / Next steps
+📊 4. Key Metrics (KPIs)
+🔹 Global Performance
+
+Total revenue
+
+Completed rides
+
+Average revenue per ride
+
+Active customers
+
+Cancellation rate
+
+🔹 Funnel Metrics
+
+Step1 / Step2 / Step3
+
+Conversion Step1→Step2
+
+Conversion Step2→Step3
+
+Conversion Step1→Step3
+
+🔹 Retention
+
+Day-1 retention
+
+Day-7 retention
+
+🔹 Geographic Performance
+
+Revenue by city
+
+Market share
+
+Average revenue per ride
+
+Ride volume
+
+🧱 5. Methodology
+1. SQL — Initial analysis
+
+Aggregations, window functions
+
+Funnel definition
+
+Retention computation
+
+Outlier detection
+
+2. Data Modeling — Star Schema
+
+Fact table: Trips
+
+Dimension tables: Customers, Drivers, Cities
+
+Calculated tables: CustomerTrips, CustomerFirstTrip
+
+3. Power BI — Dashboard
+
+Page 1: KPIs
+
+Page 2: Funnel & retention
+
+Page 3: City performance & insights
+
+Custom DAX measures
+
+🧠 6. Key Insights
+🔸 Major drop-off after first ride
+
+Step1 → Step2 conversion: 72%
+
+Step2 → Step3 conversion: 55%
+
+Day-1 retention: 0%
+
+Day-7 retention: 2.8%
+
+➡️ The first ride is the critical moment in the whole user journey.
+
+🔸 Strong geographical disparities
+
+Bordeaux, Lille, Marseille = 55% of total revenue
+
+Paris underperforms despite market size
+
+➡️ Strategic recommendation:
+Reinforce supply and pricing in underperforming cities.
+
+💡 7. Business Recommendations
+
+Improve first-ride experience
+
+Increase driver availability where conversion is low
+
+Launch reactivation campaigns
+
+Investigate cancellation causes
+
+Prioritize growth in high-value cities
+
+🗂️ 8. Repository Structure
+📁 data/
+📁 sql/
+📁 powerbi/
+📁 docs/
+README.md
+
+📸 9. Dashboard Screenshots
+
+Add 2–3 images of your Power BI pages.
+/powerbi  
+/docs  
+README.md
+
+📸 9. Dashboard Screenshots
+
+(add your 2–3 visuals here)
